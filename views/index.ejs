@@ -1,12 +1,13 @@
-<%- include('./partials/head') %> <% products.forEach(product=> { %>
+<%- include('./partials/head') %>
 
-<h2><%= product.title %></h2>
-
-  <img
-    src=https://cdn.contentful.com/spaces/x2maf5pkzgmb/environments/master/entries?access_token=VcJDwIe2eizDEjIwdVdDsF7tcQZ-0_uIrcP4BiDULsg&content_type=product&select=fields.primaryImage<%= product.primaryImage.id %>"
-    alt="product image"
-  />
-
-  <img src="<%= product.primaryImage.sys.id %>" alt="">
-
+<% products.forEach(product => { %>
+    <div>
+        <h2><%= product.title %></h2>
+        <% if (product.imageUrl) { %>
+            <img src="<%= product.imageUrl %>" alt="<%= product.title %>" width="400" height="266">
+        <% } %>
+        <p><%= product.description %></p>
+    </div>
 <% }) %>
+
+<%- include('./partials/foot') %>
