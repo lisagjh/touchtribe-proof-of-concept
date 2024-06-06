@@ -8,4 +8,5 @@
 
 * {
     font-family: var(--inter);
+    box-sizing: border-box;
 }

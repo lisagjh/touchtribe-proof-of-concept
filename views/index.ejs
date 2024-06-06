@@ -2,23 +2,11 @@
 
 <h2><%= product.title %></h2>
 
-<% if (product.image) { %>
-<picture class="cover-image">
-  <source
-    srcset="https://fdnd-agency.directus.app/assets/<%= story.image %>?width=200&height=200&format=avif"
-    type="image/avif"
-    alt="cover image"
-  />
-  <source
-    srcset="https://fdnd-agency.directus.app/assets/<%= story.image %>?width=200&height=200&format=webp"
-    type="image/webp"
-    alt="cover image"
-  />
   <img
-    src="https://fdnd-agency.directus.app/assets/<%= story.image %>?width=200&height=200"
-    alt="playlist cover image"
+    src=https://cdn.contentful.com/spaces/x2maf5pkzgmb/environments/master/entries?access_token=VcJDwIe2eizDEjIwdVdDsF7tcQZ-0_uIrcP4BiDULsg&content_type=product&select=fields.primaryImage<%= product.primaryImage.id %>"
+    alt="product image"
   />
-</picture>
-<% } else { %>
-<img src="/assets/empty-cover" alt="cover image" loading="lazy" />
-<% } %> <% }) %> <%- include('./partials/foot') %>
+
+  <img src="<%= product.primaryImage.sys.id %>" alt="">
+
+<% }) %>
