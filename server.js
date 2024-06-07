@@ -38,17 +38,20 @@ function resolveLinks(items, includes) {
   // Iterate through each item (configurable product)
   items.forEach((item) => {
     // Replace product links with the actual product entries
-    item.fields.products = item.fields.products.map((productLink) => {
-      // Get the product entry from the entry map using the link ID
-      const product = entryMap[productLink.sys.id];
-      // If the product has a primary image, resolve the image link to an actual asset
-      if (product && product.fields.primaryImage) {
-        const imageId = product.fields.primaryImage.sys.id;
-        product.fields.primaryImage = assetMap[imageId];
-      }
-      // Return the resolved product entry
-      return product;
-    });
+    item.fields.products =
+      item.fields.products && Array.isArray(item.fields.products)
+        ? item.fields.products.map((productLink) => {
+            // Get the product entry from the entry map using the link ID
+            const product = entryMap[productLink.sys.id];
+            // If the product has a primary image, resolve the image link to an actual asset
+            if (product && product.fields.primaryImage) {
+              const imageId = product.fields.primaryImage.sys.id;
+              product.fields.primaryImage = assetMap[imageId];
+            }
+            // Return the resolved product entry
+            return product;
+          })
+        : [];
   });
 
   // Return the items with resolved links
@@ -59,6 +62,7 @@ function resolveLinks(items, includes) {
 app.get("/", function (request, response) {
   // Fetch data from the Contentful API
   fetchJson(apiUrl).then((apiData) => {
+    console.log(apiData);
     // Resolve links in the fetched data
     const products = resolveLinks(apiData.items, apiData.includes);
 

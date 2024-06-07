@@ -1,75 +1,103 @@
 <%- include('./partials/head') %>
 
-    <header>
-        <svg class="tt-logo" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 100 100">
-            <path d="M48 32v48H32V32h16zm-32 0v16H0V32h16zm64 0v16H64V32h16zm0-32v16H0V0h80z" class="st0" />
-        </svg>
-
-        <div class="header-product">
-            <% let newestProduct = null; 
-if (products.length > 0) {
-  newestProduct = products[0];
-  for (let i = 1; i < products.length; i++) {
-    if (new Date(products[i].sys.updatedAt) > new Date(newestProduct.sys.updatedAt)) {
-      newestProduct = products[i];
-    }
-  }
-} 
-%>
-
-<% if (newestProduct) { %>
-  <div class="product-card">
-    <h2><%= newestProduct.fields.title %></h2>
-    <% if (newestProduct.fields.products && newestProduct.fields.products.length > 0) { %>
-      <% const firstProduct = newestProduct.fields.products[0]; %>
-      <% if (firstProduct.fields.primaryImage) { %>
-        <img src="<%= firstProduct.fields.primaryImage.fields.file.url %>" alt="<%= newestProduct.fields.title %>" width="280" height="187">
+<header>
+  <nav>
+    <svg
+      class="tt-logo"
+      xmlns="http://www.w3.org/2000/svg"
+      width="30"
+      height="30"
+      viewBox="0 0 100 100"
+    >
+      <path
+        d="M48 32v48H32V32h16zm-32 0v16H0V32h16zm64 0v16H64V32h16zm0-32v16H0V0h80z"
+        class="st0"
+      />
+    </svg>
+  </nav>
+  <div class="header-product">
+    <% let newestProduct=null; if (products.length> 0) { newestProduct =
+    products[0]; for (let i = 1; i < products.length; i++) { if (new
+    Date(products[i].sys.updatedAt)> new Date(newestProduct.sys.updatedAt)) {
+    newestProduct = products[i]; } } } %> <% if (newestProduct) { %>
+    <div class="product-card">
+      <h2><%= newestProduct.fields.title %></h2>
+      <% if (newestProduct.fields.products &&
+      newestProduct.fields.products.length> 0) { %> <% const
+      firstProduct=newestProduct.fields.products[0]; %>
+      <!-- <% if (firstProduct.fields.primaryImage) { %> -->
+      <img
+        src="<%= firstProduct.fields.primaryImage.fields.file.url %>"
+        alt="<%= newestProduct.fields.title %>"
+        width="280"
+        height="187"
+      />
+      <!-- <% } %> -->
       <% } %>
+      <p><%= newestProduct.fields.description %></p>
+
+      <form action="/">
+        <fieldset>
+          <label for="small">
+            <input class="small" type="radio" name="size" value="small" />
+            S</label
+          >
+          <label for="medium"
+            ><input class="medium" type="radio" name="size" value="medium" />
+            M</label
+          >
+          <label for="large">
+            <input class="large" type="radio" name="size" value="large" />
+            L</label
+          >
+        </fieldset>
+        <button type="submit">
+          Add to cart
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="18"
+            fill="none"
+          >
+            <path
+              fill="#121212"
+              d="M3.35 0c.383 0 .732.316.802.703l.07.422h14.652c.733 0 1.29.738 1.082 1.441l-1.884 6.75c-.14.493-.559.809-1.082.809H5.93l.315 1.688h10.78c.454 0 .837.386.837.843a.83.83 0 0 1-.837.844H5.547a.823.823 0 0 1-.802-.668L2.65 1.687H.837C.35 1.688 0 1.337 0 .845A.83.83 0 0 1 .837 0H3.35Zm1.116 16.313c0-.915.732-1.688 1.674-1.688.907 0 1.675.773 1.675 1.688 0 .949-.768 1.687-1.675 1.687a1.66 1.66 0 0 1-1.674-1.688Zm13.396 0c0 .949-.767 1.687-1.674 1.687a1.66 1.66 0 0 1-1.675-1.688c0-.914.733-1.687 1.675-1.687.907 0 1.674.773 1.674 1.688Z"
+            />
+          </svg>
+        </button>
+      </form>
+    </div>
     <% } %>
-    <p><%= newestProduct.fields.description %></p>
-    <form action="/">
-      <input class="small" type="radio" name="size" value="small">
-      <label for="small">S</label>
-      <input class="medium" type="radio" name="size" value="medium">
-      <label for="medium">M</label>
-      <input class="large" type="radio" name="size" value="large">
-      <label for="large">L</label>
-      <button type="submit">Submit</button>
-    </form>
   </div>
-<% } %>
-        </div>
+</header>
 
-    </header>
-
-    <main>
-        <div class="product-container">
-            <% products.forEach(product=> { %>
-                <div class="product-card">
-                    <h2>
-                        <%= product.fields.title %>
-                    </h2>
-                    <% if (product.fields.products && product.fields.products.length> 0) { %>
-                        <% const firstProduct=product.fields.products[0]; %>
-                            <% if (firstProduct.fields.primaryImage) { %>
-                                <img src="<%= firstProduct.fields.primaryImage.fields.file.url %>"
-                                    alt="<%= product.fields.title %>" width="280" height="187">
-                                <% } %>
-                                    <% } %>
-                                        <p>
-                                            <%= product.fields.description %>
-                                        </p>
-                                        <form action="/">
-                                            <input class="small" type="radio" name="size" value="small">
-                                            <label for="small">S</label>
-                                            <input class="medium" type="radio" name="size" value="medium">
-                                            <label for="medium">M</label>
-                                            <input class="large" type="radio" name="size" value="large">
-                                            <label for="large">L</label>
-                                            <button type="submit">Submit</button>
-                                        </form>
-                </div>
-                <% }) %>
-        </div>
-    </main>
-    <%- include('./partials/foot') %>
+<main>
+  <div class="product-container">
+    <% products.forEach(product=> { %>
+    <div class="product-card">
+      <h2><%= product.fields.title %></h2>
+      <% if (product.fields.products && product.fields.products.length> 0) { %>
+      <% const firstProduct=product.fields.products[0]; %> <% if
+      (firstProduct.fields.primaryImage) { %>
+      <img
+        src="<%= firstProduct.fields.primaryImage.fields.file.url %>"
+        alt="<%= product.fields.title %>"
+        width="280"
+        height="187"
+      />
+      <% } %> <% } %>
+      <p><%= product.fields.description %></p>
+      <form action="/">
+        <input class="small" type="radio" name="size" value="small" />
+        <label for="small">S</label>
+        <input class="medium" type="radio" name="size" value="medium" />
+        <label for="medium">M</label>
+        <input class="large" type="radio" name="size" value="large" />
+        <label for="large">L</label>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <% }) %>
+  </div>
+</main>
+<%- include('./partials/foot') %>
