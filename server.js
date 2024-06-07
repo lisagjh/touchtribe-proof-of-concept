@@ -17,26 +17,16 @@ app.use(express.static("public"));
 // Parse URL-encoded request bodies
 app.use(express.urlencoded({ extended: true }));
 
-// Set the base API endpoint for fetching products
+// Set the base API endpoint
 const apiUrl = "https://cdn.contentful.com/spaces/x2maf5pkzgmb/environments/master/entries?access_token=VcJDwIe2eizDEjIwdVdDsF7tcQZ-0_uIrcP4BiDULsg&content_type=product&select=fields";
 
-/**
- * Function to resolve the URL of an image asset
- * @param {string} assetId - The ID of the asset
- * @param {Array} assets - The array of assets
- * @returns {string|null} - The URL of the asset or null if not found
- */
+// Function to resolve the asset URL
 function resolveImageUrl(assetId, assets) {
   const asset = assets.find(asset => asset.sys.id === assetId);
   return asset ? `https:${asset.fields.file.url}` : null;
 }
 
-/**
- * Function to aggregate products by title
- * @param {Array} items - The array of product items
- * @param {Array} assets - The array of assets
- * @returns {Array} - The array of aggregated products
- */
+// Function to aggregate products by title
 function aggregateProductsByTitle(items, assets) {
   const productsMap = {};
 
@@ -70,17 +60,14 @@ function aggregateProductsByTitle(items, assets) {
 
 // Route for the homepage
 app.get("/", function (request, response) {
-  // Fetch data from the API
+  // Fetch all products from the API
   fetchJson(apiUrl).then((apiData) => {
     const assets = apiData.includes.Asset;
 
     // Aggregate products by title and sort them
     const products = aggregateProductsByTitle(apiData.items, assets);
 
-    // // Log the sorted products for debugging
-    // console.log("Sorted Products:", products);
-
-    // Render the index template with the sorted products
+    // Render the home template with the aggregated and sorted products
     response.render("index", {
       products: products
     });
@@ -91,7 +78,7 @@ app.get("/", function (request, response) {
   });
 });
 
-// Start the server on the specified port
+// Start the server
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, function () {
   console.log(`Application started on http://localhost:${PORT}`);

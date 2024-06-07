@@ -4,9 +4,48 @@
 :root {
     --inter: "Inter", sans-serif;
     --inter-tight: "Inter Tight", sans-serif;
+
+    --space-big: 1.6rem;
+    --space-reg: 1rem;
+    --space-half: 0.5rem;
+    --space-fourth: 0.2rem
 }
 
 * {
     font-family: var(--inter);
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
+
+main {
+    width: 100vw;
+}
+
+p {
+    font-family: var(--inter-tight);
+}
+
+.product-container {
+    display: grid;
+    place-items: center;
+    gap: var(--space-big);
+}
+
+/* PRODUCT CARD */
+
+.product-card {
+    display: grid;
+    place-items: center;
+    max-width: 18rem;
+    overflow: hidden;
+}
+
+.product-card h2 {
+    font-size: 1.3rem;
+}
+
+.product-card img {
+    clip-path: polygon(65% 0, 75% 15%, 75% 100%, 25% 100%, 25% 0);
+}
+
