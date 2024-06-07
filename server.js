@@ -18,18 +18,72 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 // Set the base API endpoint
-const apiUrl = "https://cdn.contentful.com/spaces/x2maf5pkzgmb/environments/master/entries?access_token=VcJDwIe2eizDEjIwdVdDsF7tcQZ-0_uIrcP4BiDULsg&content_type=configurableProduct"
+const apiUrl =
+  "https://cdn.contentful.com/spaces/x2maf5pkzgmb/environments/master/entries?access_token=VcJDwIe2eizDEjIwdVdDsF7tcQZ-0_uIrcP4BiDULsg&content_type=configurableProduct";
+
+// Helper function to resolve linked entries
+function resolveLinks(items, includes) {
+  // Create a map to store entries by their ID for quick lookup
+  const entryMap = {};
+  includes.Entry.forEach((entry) => {
+    entryMap[entry.sys.id] = entry;
+  });
+
+  // Create a map to store assets (images) by their ID for quick lookup
+  const assetMap = {};
+  includes.Asset.forEach((asset) => {
+    assetMap[asset.sys.id] = asset;
+  });
+
+  // Iterate through each item (configurable product)
+  items.forEach((item) => {
+    // Replace product links with the actual product entries
+    item.fields.products = item.fields.products.map((productLink) => {
+      // Get the product entry from the entry map using the link ID
+      const product = entryMap[productLink.sys.id];
+      // If the product has a primary image, resolve the image link to an actual asset
+      if (product && product.fields.primaryImage) {
+        const imageId = product.fields.primaryImage.sys.id;
+        product.fields.primaryImage = assetMap[imageId];
+      }
+      // Return the resolved product entry
+      return product;
+    });
+  });
+
+  // Return the items with resolved links
+  return items;
+}
 
 // Route for the homepage
 app.get("/", function (request, response) {
-  // Fetch all products from the API
+  // Fetch data from the Contentful API
   fetchJson(apiUrl).then((apiData) => {
-   
-    // Render the home template with the aggregated and sorted products
+    // Resolve links in the fetched data
+    const products = resolveLinks(apiData.items, apiData.includes);
+
+    //  newestProduct variable is to display the newest product in the header. It has to be defined within the route because it relies on data that is fetched each time the route is accessed
+    // Initialize a variable to hold the newest product
+    let newestProduct = null;
+    if (products.length > 0) {
+      // Assume the first product is the newest initially
+      newestProduct = products[0];
+      // Loop through the products to find the one with the most recent updatedAt timestamp
+      for (let i = 1; i < products.length; i++) {
+        const currentTimestamp = new Date(products[i].sys.updatedAt);
+        const newestTimestamp = new Date(newestProduct.sys.updatedAt);
+        if (currentTimestamp > newestTimestamp) {
+          newestProduct = products[i];
+        }
+      }
+    }
+
+    // Render the 'index' template with the products and the newest product
     response.render("index", {
-      products: products.apiData
+      products: products,
+      newestProduct: newestProduct,
     });
-  })
+  });
 });
 
 // Start the server

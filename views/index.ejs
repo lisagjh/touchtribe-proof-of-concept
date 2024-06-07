@@ -6,42 +6,38 @@
         </svg>
 
         <div class="header-product">
-            <% 
-            let newestProduct = null;
-            if (products.length > 0) {
-                newestProduct = products[0];
-                for (let i = 1; i < products.length; i++) {
-                    if (new Date(products[i].timestamp) > new Date(newestProduct.timestamp)) {
-                        newestProduct = products[i];
-                    }
-                }
-            }
-            %>
-    
-            <% if (newestProduct) { %>
-                <div class="product-card">
-                    <h2>
-                        <%= newestProduct.title %>
-                    </h2>
-                    <% if (newestProduct.imageUrl) { %>
-                        <img src="<%= newestProduct.imageUrl %>" alt="<%= newestProduct.title %>" width="280" height="187">
-                    <% } %>
-                    <p>
-                        <%= newestProduct.description %>
-                    </p>
-    
-                    <form action="/">
-                        <input class="small" type="radio">
-                        <label for="small">S</label>
-                        <input class="medium" type="radio">
-                        <label for="medium">M</label>
-                        <input class="large" type="radio">
-                        <label for="large">L</label>
-                        <button type="submit">
-                        </button>
-                    </form>
-                </div>
-            <% } %>
+            <% let newestProduct = null; 
+if (products.length > 0) {
+  newestProduct = products[0];
+  for (let i = 1; i < products.length; i++) {
+    if (new Date(products[i].sys.updatedAt) > new Date(newestProduct.sys.updatedAt)) {
+      newestProduct = products[i];
+    }
+  }
+} 
+%>
+
+<% if (newestProduct) { %>
+  <div class="product-card">
+    <h2><%= newestProduct.fields.title %></h2>
+    <% if (newestProduct.fields.products && newestProduct.fields.products.length > 0) { %>
+      <% const firstProduct = newestProduct.fields.products[0]; %>
+      <% if (firstProduct.fields.primaryImage) { %>
+        <img src="<%= firstProduct.fields.primaryImage.fields.file.url %>" alt="<%= newestProduct.fields.title %>" width="280" height="187">
+      <% } %>
+    <% } %>
+    <p><%= newestProduct.fields.description %></p>
+    <form action="/">
+      <input class="small" type="radio" name="size" value="small">
+      <label for="small">S</label>
+      <input class="medium" type="radio" name="size" value="medium">
+      <label for="medium">M</label>
+      <input class="large" type="radio" name="size" value="large">
+      <label for="large">L</label>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+<% } %>
         </div>
 
     </header>
@@ -51,25 +47,27 @@
             <% products.forEach(product=> { %>
                 <div class="product-card">
                     <h2>
-                        <%= product.title %>
+                        <%= product.fields.title %>
                     </h2>
-                    <% if (product.imageUrl) { %>
-                        <img src="<%= product.imageUrl %>" alt="<%= product.title %>" width="280" height="187">
-                        <% } %>
-                            <p>
-                                <%= product.description %>
-                            </p>
-
-                            <form action="/">
-                                <input class="small" type="radio">
-                                <label for="small">S</label>
-                                <input class="medium" type="radio">
-                                <label for="medium">M</label>
-                                <input class="large" type="radio">
-                                <label for="large">L</label>
-                                <button type="submit">
-                                </button>
-                            </form>
+                    <% if (product.fields.products && product.fields.products.length> 0) { %>
+                        <% const firstProduct=product.fields.products[0]; %>
+                            <% if (firstProduct.fields.primaryImage) { %>
+                                <img src="<%= firstProduct.fields.primaryImage.fields.file.url %>"
+                                    alt="<%= product.fields.title %>" width="280" height="187">
+                                <% } %>
+                                    <% } %>
+                                        <p>
+                                            <%= product.fields.description %>
+                                        </p>
+                                        <form action="/">
+                                            <input class="small" type="radio" name="size" value="small">
+                                            <label for="small">S</label>
+                                            <input class="medium" type="radio" name="size" value="medium">
+                                            <label for="medium">M</label>
+                                            <input class="large" type="radio" name="size" value="large">
+                                            <label for="large">L</label>
+                                            <button type="submit">Submit</button>
+                                        </form>
                 </div>
                 <% }) %>
         </div>
