@@ -1,4 +1,51 @@
 <%- include('./partials/head') %>
+
+    <header>
+        <svg class="tt-logo" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 100 100">
+            <path d="M48 32v48H32V32h16zm-32 0v16H0V32h16zm64 0v16H64V32h16zm0-32v16H0V0h80z" class="st0" />
+        </svg>
+
+        <div class="header-product">
+            <% 
+            let newestProduct = null;
+            if (products.length > 0) {
+                newestProduct = products[0];
+                for (let i = 1; i < products.length; i++) {
+                    if (new Date(products[i].timestamp) > new Date(newestProduct.timestamp)) {
+                        newestProduct = products[i];
+                    }
+                }
+            }
+            %>
+    
+            <% if (newestProduct) { %>
+                <div class="product-card">
+                    <h2>
+                        <%= newestProduct.title %>
+                    </h2>
+                    <% if (newestProduct.imageUrl) { %>
+                        <img src="<%= newestProduct.imageUrl %>" alt="<%= newestProduct.title %>" width="280" height="187">
+                    <% } %>
+                    <p>
+                        <%= newestProduct.description %>
+                    </p>
+    
+                    <form action="/">
+                        <input class="small" type="radio">
+                        <label for="small">S</label>
+                        <input class="medium" type="radio">
+                        <label for="medium">M</label>
+                        <input class="large" type="radio">
+                        <label for="large">L</label>
+                        <button type="submit">
+                        </button>
+                    </form>
+                </div>
+            <% } %>
+        </div>
+
+    </header>
+
     <main>
         <div class="product-container">
             <% products.forEach(product=> { %>
@@ -12,6 +59,17 @@
                             <p>
                                 <%= product.description %>
                             </p>
+
+                            <form action="/">
+                                <input class="small" type="radio">
+                                <label for="small">S</label>
+                                <input class="medium" type="radio">
+                                <label for="medium">M</label>
+                                <input class="large" type="radio">
+                                <label for="large">L</label>
+                                <button type="submit">
+                                </button>
+                            </form>
                 </div>
                 <% }) %>
         </div>

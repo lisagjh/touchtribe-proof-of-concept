@@ -18,64 +18,18 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 // Set the base API endpoint
-const apiUrl = "https://cdn.contentful.com/spaces/x2maf5pkzgmb/environments/master/entries?access_token=VcJDwIe2eizDEjIwdVdDsF7tcQZ-0_uIrcP4BiDULsg&content_type=product&select=fields";
-
-// Function to resolve the asset URL
-function resolveImageUrl(assetId, assets) {
-  const asset = assets.find(asset => asset.sys.id === assetId);
-  return asset ? `https:${asset.fields.file.url}` : null;
-}
-
-// Function to aggregate products by title
-function aggregateProductsByTitle(items, assets) {
-  const productsMap = {};
-
-  // Loop through each item to aggregate products
-  items.forEach(item => {
-    const product = item.fields;
-    const { sku, primaryImage, title, description, size } = product;
-    const imageUrl = primaryImage ? resolveImageUrl(primaryImage.sys.id, assets) : null;
-
-    // Check if the product title already exists in the map
-    if (!productsMap[title]) {
-      // Create a new entry for the product
-      productsMap[title] = {
-        sku: sku,
-        title: title,
-        description: description,
-        imageUrl: imageUrl,
-        sizes: [] // Initialize an empty array for sizes
-      };
-    }
-
-    // Add the size to the sizes array if it exists
-    if (size) {
-      productsMap[title].sizes.push(size.sys.id);
-    }
-  });
-
-  // Convert the map to an array and sort it alphabetically by title
-  return Object.values(productsMap).sort((a, b) => a.title.localeCompare(b.title));
-}
+const apiUrl = "https://cdn.contentful.com/spaces/x2maf5pkzgmb/environments/master/entries?access_token=VcJDwIe2eizDEjIwdVdDsF7tcQZ-0_uIrcP4BiDULsg&content_type=configurableProduct"
 
 // Route for the homepage
 app.get("/", function (request, response) {
   // Fetch all products from the API
   fetchJson(apiUrl).then((apiData) => {
-    const assets = apiData.includes.Asset;
-
-    // Aggregate products by title and sort them
-    const products = aggregateProductsByTitle(apiData.items, assets);
-
+   
     // Render the home template with the aggregated and sorted products
     response.render("index", {
-      products: products
+      products: products.apiData
     });
-  }).catch(error => {
-    // Handle any errors that occur during the fetch operation
-    console.error("Error fetching API data:", error);
-    response.status(500).send("Internal Server Error");
-  });
+  })
 });
 
 // Start the server

@@ -5,6 +5,9 @@
     --inter: "Inter", sans-serif;
     --inter-tight: "Inter Tight", sans-serif;
 
+    --primary-one: #414141;
+    --primary-two: #fff;
+
     --space-big: 1.6rem;
     --space-reg: 1rem;
     --space-half: 0.5rem;
@@ -16,6 +19,12 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    line-height: 1.5;
+}
+
+header {
+    background-color: var(--primary-one);
+    color: var(--primary-two);
 }
 
 main {
@@ -37,6 +46,7 @@ p {
 .product-card {
     display: grid;
     place-items: center;
+    gap: var(--space-half);
     max-width: 18rem;
     overflow: hidden;
 }
@@ -49,3 +59,14 @@ p {
     clip-path: polygon(65% 0, 75% 15%, 75% 100%, 25% 100%, 25% 0);
 }
 
+/* SVG */
+
+.tt-logo path {
+    fill: white;
+}
+
+@media (min-width: 32.5rem) {
+    .product-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
