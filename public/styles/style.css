@@ -28,7 +28,6 @@ header {
     background-color: var(--primary-one);
     color: var(--primary-two);
     height: 90vh;
-    max-height: ;
 }
 
 nav {
@@ -77,15 +76,7 @@ header .product-card img {
 
 /* PRODUCT CARD - FORM */
 
-form input {
-    appearance: none;
-}
-
-label {
-    border: 1px solid red;
-}
-
-input:checked label {
+fieldset {
     background-color: var(--grey);
 }
 

@@ -66,7 +66,17 @@ app.get("/", function (request, response) {
     // Resolve links in the fetched data
     const products = resolveLinks(apiData.items, apiData.includes);
 
-    //  newestProduct variable is to display the newest product in the header. It has to be defined within the route because it relies on data that is fetched each time the route is accessed
+    // Sort products alphabetically by their name (assuming `product.fields.name` is the name field)
+    products.sort((a, b) => {
+      if (a.fields.name < b.fields.name) {
+        return -1;
+      }
+      if (a.fields.name > b.fields.name) {
+        return 1;
+      }
+      return 0;
+    });
+
     // Initialize a variable to hold the newest product
     let newestProduct = null;
     if (products.length > 0) {
@@ -81,6 +91,22 @@ app.get("/", function (request, response) {
         }
       }
     }
+
+    // Render the 'index' template with the products and the newest product
+    response.render("index", {
+      products: products,
+      newestProduct: newestProduct,
+    });
+  });
+});
+
+// Route for the detail page
+app.get("/:sku", function (request, response) {
+  // Fetch data from the Contentful API
+  fetchJson(apiUrl).then((apiData) => {
+    console.log(apiData);
+    // Resolve links in the fetched data
+    const products = resolveLinks(apiData.items, apiData.includes);
 
     // Render the 'index' template with the products and the newest product
     response.render("index", {
