@@ -100,22 +100,6 @@ app.get("/", function (request, response) {
   });
 });
 
-// Route for the detail page
-app.get("/:sku", function (request, response) {
-  // Fetch data from the Contentful API
-  fetchJson(apiUrl).then((apiData) => {
-    console.log(apiData);
-    // Resolve links in the fetched data
-    const products = resolveLinks(apiData.items, apiData.includes);
-
-    // Render the 'index' template with the products and the newest product
-    response.render("index", {
-      products: products,
-      newestProduct: newestProduct,
-    });
-  });
-});
-
 // Start the server
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, function () {
