@@ -69,6 +69,10 @@ p {
     gap: var(--space-big);
 }
 
+.product-container li {
+    list-style-type: "";
+}
+
 /* HEADER PRODUCT CARD - NEWEST PRODUCT */
 
 .sticker {
@@ -88,9 +92,7 @@ p {
     border-radius: 3rem;
     rotate: -15deg;
     z-index: 5;
-
-    animation: name duration timing-function delay iteration-count direction fill-mode;
-    animation: sticker 1.5s ease-in-out 0s infinite forwards;
+    animation: sticker 2.25s ease-in-out 0s infinite forwards;
 }
 
 @keyframes sticker {
