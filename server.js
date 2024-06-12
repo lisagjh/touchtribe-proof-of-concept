@@ -36,7 +36,7 @@ const imageData = productsData.items.map((item) => {
 app.get("/", function (request, response) {
   console.log(imageData)
   response.render("index", {
-    products: productsData.items,
+    products: productsData.data,
     items: imageData,
   });
 });

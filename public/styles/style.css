@@ -108,21 +108,20 @@ p {
 }
 
 .header-product {
-  grid-column: 1/10;
+  grid-column: 2/10;
   grid-row: 1/7;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
   padding: 0 var(--space-reg);
+  text-wrap: balance;
 }
 
 .header-product p {
-  width: 35ch;
-  text-wrap: balance;
+  width: 33ch;
 }
 
 .header-product img {

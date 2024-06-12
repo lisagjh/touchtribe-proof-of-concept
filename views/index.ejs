@@ -27,29 +27,32 @@
         </div>
 
         <section class="header-product">
-            <h1>Newest Product!</h1>
-            <p>Hier komt het nieuwste product te staan.
-                <br>
-                Zodra ik een goede manier heb gevonden om dit te doen.
-            </p>
-        </section>
 
+
+
+        </section>
     </header>
 
     <main>
         <section class="product-container">
-            <% items.forEach(item => { %>
+            <% products.forEach(product=> { %>
                 <div class="product-card">
                     <%= item.title %>
-                    <% item.products.forEach(product => { %>
-                        <picture>
-                            <source srcset="<%= product.imageUrl %>?fm=webp&w=300" type="image/webp">
-                            <source srcset="<%= product.imageUrl %>?fm=avif&w=300" type="image/avif">
-                            <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
-                        </picture>
-                    <% }); %>
+                        <% item.products.forEach(product=> { %>
+                            <picture>
+                                <source srcset="<%= product.imageUrl %>?fm=avif&w=300" type="image/avif"
+                                    media="(max-width: 500px)">
+                                <source srcset="<%= product.imageUrl %>?fm=avif&w=400" type="image/avif"
+                                    media="(min-width: 501px)">
+                                <source srcset="<%= product.imageUrl %>?fm=webp&w=300" type="image/webp"
+                                    media="(max-width: 500px)">
+                                <source srcset="<%= product.imageUrl %>?fm=webp&w=400" type="image/webp"
+                                    media="(min-width: 501px)">
+                                <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+                            </picture>
+                            <% }); %>
                 </div>
-            <% }); %>
+                <% }); %>
         </section>
     </main>
 
