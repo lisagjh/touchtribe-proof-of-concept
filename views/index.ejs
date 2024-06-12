@@ -12,7 +12,9 @@
                         </h2>
 
                         <picture>
-                            <source srcset="<%= product.imageUrl %>?fm=avif&w=300" type="image/avif"
+                            <source
+                                srcset="https://images.ctfassets.net/x2maf5pkzgmb/<%= product.imageUrl %>?fm=avif">
+                            <source srcset="<%= product.primaryImage %>?fm=avif&w=300" type="image/avif"
                                 media="(max-width: 500px)">
                             <source srcset="<%= product.imageUrl %>?fm=avif&w=400" type="image/avif"
                                 media="(min-width: 501px)">
