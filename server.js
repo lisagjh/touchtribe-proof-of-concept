@@ -11,33 +11,16 @@ app.use(express.urlencoded({ extended: true }));
 
 const apiUrl =
   "https://cdn.contentful.com/spaces/x2maf5pkzgmb/environments/master/entries?access_token=VcJDwIe2eizDEjIwdVdDsF7tcQZ-0_uIrcP4BiDULsg&content_type=configurableProduct";
+const apiProductUrl =
+  "https://cdn.contentful.com/spaces/x2maf5pkzgmb/environments/master/entries?access_token=VcJDwIe2eizDEjIwdVdDsF7tcQZ-0_uIrcP4BiDULsg&content_type=product";
+const apiSizeUrl =
+  "https://cdn.contentful.com/spaces/x2maf5pkzgmb/environments/master/entries?access_token=VcJDwIe2eizDEjIwdVdDsF7tcQZ-0_uIrcP4BiDULsg&content_type=size";
 
-const productData = await fetchJson(apiUrl);
-
-const imageData = productData.items.map((item) => {
-  const products = item.fields.products.map((productLink) => {
-    const product = productData.includes.Entry.find(
-      (entry) => entry.sys.id === productLink.sys.id
-    );
-    const imageId = product.fields.primaryImage.sys.id;
-    const imageUrl = productData.includes.Asset.find(
-      (asset) => asset.sys.id === imageId
-    ).fields.file.url;
-
-    return {
-      title: product.fields.title,
-      imageUrl: `https:${imageUrl}`,
-    };
-  });
-
-  return { products };
-});
+const productsData = await fetchJson(apiUrl);
 
 app.get("/", function (request, response) {
-  console.log(imageData)
   response.render("index", {
-    products: productData.items,
-    items: imageData,
+    products: productsData.items,
   });
 });
 
