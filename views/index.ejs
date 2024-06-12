@@ -26,25 +26,32 @@
             </svg>
         </div>
 
+        <section class="header-product">
+            <h1>Newest Product!</h1>
+            <p>Hier komt het nieuwste product te staan.
+                <br>
+                Zodra ik een goede manier heb gevonden om dit te doen.
+            </p>
+        </section>
+
     </header>
 
     <main>
         <section class="product-container">
-
-            <ul>
-                <% products.forEach(product=> { %>
-                    <li class="product">
-                        <h2>
-                            <%= product.fields.title %>
-                        </h2>
-                        <img src="<%= getImageUrl(p.sys.id) %>" alt="<%= p.fields.title %>">
-
-                    </li>
-                    <% }) %>
-
-            </ul>
+            <% items.forEach(item => { %>
+                <div class="product-card">
+                    <%= item.title %>
+                    <% item.products.forEach(product => { %>
+                        <picture>
+                            <source srcset="<%= product.imageUrl %>?fm=webp&w=300" type="image/webp">
+                            <source srcset="<%= product.imageUrl %>?fm=avif&w=300" type="image/avif">
+                            <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+                        </picture>
+                    <% }); %>
+                </div>
+            <% }); %>
         </section>
     </main>
 
-    
+
     <%- include('./partials/foot') %>
