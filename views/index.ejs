@@ -1,34 +1,22 @@
 <%- include('./partials/head') %>
-
     <%- include('./partials/header') %>
 
-        <main>
-            <section class="product-container">
-                <% products.forEach(product=> { %>
-                    <div class="product-card">
+        <% products.forEach(product=> { %>
+            <div class="product-card">
+                <h2>
+                    <%= product.title %>
+                </h2>
+                <picture>
+                    <source srcset="<%= product.imageUrl %>?fm=avif&w=300" type="image/avif" media="(max-width: 500px)">
+                    <source srcset="<%= product.imageUrl %>?fm=avif&w=400" type="image/avif" media="(min-width: 501px)">
+                    <source srcset="<%= product.imageUrl %>?fm=webp&w=300" type="image/webp" media="(max-width: 500px)">
+                    <source srcset="<%= product.imageUrl %>?fm=webp&w=400" type="image/webp" media="(min-width: 501px)">
+                    <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+                </picture>
+                <p>
+                    <%= product.description %>
+                </p>
+            </div>
+            <% }) %>
 
-                        <h2>
-                            <%= product.fields.title %>
-                        </h2>
-
-                        <picture>
-                            <source
-                                srcset="https://images.ctfassets.net/x2maf5pkzgmb/<%= product.imageUrl %>?fm=avif">
-                            <source srcset="<%= product.primaryImage %>?fm=avif&w=300" type="image/avif"
-                                media="(max-width: 500px)">
-                            <source srcset="<%= product.imageUrl %>?fm=avif&w=400" type="image/avif"
-                                media="(min-width: 501px)">
-                            <source srcset="<%= product.imageUrl %>?fm=webp&w=300" type="image/webp"
-                                media="(max-width: 500px)">
-                            <source srcset="<%= product.imageUrl %>?fm=webp&w=400" type="image/webp"
-                                media="(min-width: 501px)">
-                            <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
-                        </picture>
-
-                        <% }) %>
-            </section>
-        </main>
-
-
-
-        <%- include('./partials/foot') %>
+                <%- include('./partials/foot') %>
