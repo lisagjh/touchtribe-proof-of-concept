@@ -42,7 +42,7 @@ app.get("/", function (request, response) {
       return {
         id: config.sys.id,
         name: config.fields.title,
-        image: simple.fields.primaryImage,
+        image: simple.fields.primaryImage.sys,
         size: simple.fields.size,
         description: simple.fields.description,
       };
