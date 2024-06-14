@@ -10,17 +10,21 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 const apiUrl =
-  "https://cdn.contentful.com/spaces/x2maf5pkzgmb/environments/master/entries?access_token=VcJDwIe2eizDEjIwdVdDsF7tcQZ-0_uIrcP4BiDULsg&content_type=configurableProduct";
-const apiProductUrl =
-  "https://cdn.contentful.com/spaces/x2maf5pkzgmb/environments/master/entries?access_token=VcJDwIe2eizDEjIwdVdDsF7tcQZ-0_uIrcP4BiDULsg&content_type=product";
-const apiSizeUrl =
-  "https://cdn.contentful.com/spaces/x2maf5pkzgmb/environments/master/entries?access_token=VcJDwIe2eizDEjIwdVdDsF7tcQZ-0_uIrcP4BiDULsg&content_type=size";
+  "https://cdn.contentful.com/spaces/x2maf5pkzgmb/environments/master/entries?access_token=VcJDwIe2eizDEjIwdVdDsF7tcQZ-0_uIrcP4BiDULsg";
 
-const productsData = await fetchJson(apiUrl);
+const confData = await fetchJson(apiUrl + "&content_type=configurableProduct");
+const productData = await fetchJson(apiUrl + "&content_type=product");
+const sizeData = await fetchJson(apiUrl + "&content_type=size");
 
+// route voor homepage
 app.get("/", function (request, response) {
-  response.render("index", {
-    products: productsData.items,
+  // Haal alle personen uit de WHOIS API op
+  fetchJson(apiUrl).then((apiData) => {
+    response.render("index", {
+      configured: confData.data,
+      products: productData.data,
+      sizes: sizeData.data,
+    });
   });
 });
 

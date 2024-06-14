@@ -27,6 +27,10 @@
                                 <img src="/assets/sweater.avif" alt="sweater" width="300">
                                 <% } %>
 
+                                    <p>
+                                        <%= product.fields.description %>
+                                    </p>
+
                                     <form action="/">
                                         <input id="small" name="size" type="radio"> S
                                         <label for="small">
@@ -37,6 +41,8 @@
                                         <input id="large" name="size" type="radio"> L
                                         <label for="large">
                                         </label>
+
+                                        <button type="submit">Add to cart</button>
                                     </form>
 
                                     <% }) %>

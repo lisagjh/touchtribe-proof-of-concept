@@ -131,7 +131,7 @@ nav .tt-wordmark {
 .header-product img {
   object-fit: cover;
   object-position: center;
-  width: 60%;
+  width: 100%;
   /* clip-path: polygon(15% 0, 75% 0, 85% 15%, 85% 100%, 15% 100%); */
 }
 
@@ -175,10 +175,4 @@ button[type="submit"] span {
 
 .tt-logo path {
   fill: white;
-}
-
-@media (min-width: 32.5rem) {
-  .product-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
