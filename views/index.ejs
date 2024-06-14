@@ -5,50 +5,42 @@
         <main>
             <section class="product-container">
                 <% products.forEach(product=> { %>
-                    <div class="product-card">
+                    <% console.log(product.image) %>
+                        <div class="product-card">
+                            <h2>
+                                <%= product.name %>
+                            </h2>
+                            <!-- bron: https://www.contentful.com/blog/always-look-your-best-webp-source-sets-and-the-contentful-images-api/   -->
+                            <!-- https://images.ctfassets.net/{space_id}/{asset_id}/{unique_id}/{name}?fm={image_format} -->
 
-                        <h2>
-                            <%= product.fields.title %>
-                        </h2>
-
-                        <% if (product.imageUrl) { %>
                             <picture>
-                                <source srcset="https://images.ctfassets.net/x2maf5pkzgmb/<%= product.imageUrl %>?fm=avif&w=300" type="image/avif"
-                                    media="(max-width: 500px)">
-                                <source srcset="<%= product.imageUrl %>?fm=avif&w=400" type="image/avif"
-                                    media="(min-width: 501px)">
-                                <source srcset="<%= product.imageUrl %>?fm=webp&w=300" type="image/webp"
-                                    media="(max-width: 500px)">
-                                <source srcset="<%= product.imageUrl %>?fm=webp&w=400" type="image/webp"
-                                    media="(min-width: 501px)">
-                                <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+                                <source srcset="https://images.ctfassets.net/<%= product.image%>?fm=avif&w=300"
+                                    type="image/avif" media="(max-width: 500px)">
+                                <source srcset="https://images.ctfassets.net/<%= product.image%>?fm=avif&w=400"
+                                    type="image/avif" media="(min-width: 501px)">
+                                <source srcset="https://images.ctfassets.net/<%= product.image%>?fm=webp&w=300"
+                                    type="image/webp" media="(max-width: 500px)">
+                                <source srcset="https://images.ctfassets.net/<%= product.image%>?fm=webp&w=400"
+                                    type="image/webp" media="(min-width: 501px)">
+                                <img src="https://images.ctfassets.net/<%= product.image%>" alt="<%= product.title %>">
                             </picture>
-                            <% } else { %>
-                                <img src="/assets/sweater.avif" alt="sweater" width="300">
-                                <% } %>
 
-                                <p>
-                                    <%= product.fields.description %>
-                                </p>
+                            <p>
+                                <%= product.description %>
+                            </p>
 
-                                    <form action="/">
-                                        <input id="small" name="size" type="radio"> S
-                                        <label for="small">
-                                        </label>
-                                        <input id="medium" name="size" type="radio"> M
-                                        <label for="medium">
-                                        </label>
-                                        <input id="large" name="size" type="radio"> L
-                                        <label for="large">
-                                        </label>
-
-                                        <button type="submit">Add to cart</button>
-                                    </form>
-
-                                    <% }) %>
+                            <form action="/">
+                                <input id="small" name="size" type="radio"> S
+                                <label for="small"></label>
+                                <input id="medium" name="size" type="radio"> M
+                                <label for="medium"></label>
+                                <input id="large" name="size" type="radio"> L
+                                <label for="large"></label>
+                                <button type="submit">Add to cart</button>
+                            </form>
+                        </div>
+                        <% }) %>
             </section>
         </main>
-
-
 
         <%- include('./partials/foot') %>
