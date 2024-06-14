@@ -42,14 +42,14 @@ app.get("/", function (request, response) {
       return {
         id: config.sys.id,
         name: config.fields.title,
-        image: simple.fields.primaryImage.sys,
+        image: simple.fields.primaryImage.sys.id,
         size: simple.fields.size,
         description: simple.fields.description,
       };
     })
     .filter((item) => item !== null); // Filter out any null entries
 
-  console.log(combinedProduct); // Log the combined product array to the console
+    console.log(combinedProduct)
   response.render("index", {
     products: combinedProduct, // Pass combinedProduct as 'products' to the EJS template
   });

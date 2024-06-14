@@ -7,20 +7,21 @@
       <h2><%= product.name %></h2>
 
       <!-- bron: https://www.contentful.com/blog/always-look-your-best-webp-source-sets-and-the-contentful-images-api/   -->
-      <!-- https://images.ctfassets.net/{space_id}/{asset_id}/{unique_id}/{name}?fm={image_format} -->
+      <!-- https://images.ctfassets.net/
+       {space_id}/{asset_id}/{unique_id}/{name}?fm={image_format} -->
 
       <picture>
         <% console.log(product.image) %>
         <source
-          srcset="https://assets.ctfassets.net/<%= product.image.id %>?fm=avif"
+          srcset="https://assets.ctfassets.net/x2maf5pkzgmb/<%= product.image %>?fm=avif"
           type="image/avif"
         />
         <source
-          srcset="https://assets.ctfassets.net/<%= product.image.id %>?fm=webp"
+          srcset="https://assets.ctfassets.net/x2maf5pkzgmb/<%= product.image %>?fm=webp"
           type="image/webp"
         />
         <img
-          src="https://assets.ctfassets.net/<%= product.image.id %>"
+          src="https://assets.ctfassets.net/x2maf5pkzgmb/<%= product.image %>"
           alt="<%= product.name %>"
         />
       </picture>
