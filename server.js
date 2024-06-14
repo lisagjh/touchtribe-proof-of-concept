@@ -18,8 +18,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 // Set the base API endpoint for fetching products
-const apiUrl =
-  "https://cdn.contentful.com/spaces/x2maf5pkzgmb/environments/master/entries?access_token=VcJDwIe2eizDEjIwdVdDsF7tcQZ-0_uIrcP4BiDULsg&content_type=product&select=fields";
+const apiUrl = "https://cdn.contentful.com/spaces/x2maf5pkzgmb/environments/master/entries?access_token=VcJDwIe2eizDEjIwdVdDsF7tcQZ-0_uIrcP4BiDULsg&content_type=product&select=fields";
 
 /**
  * Function to resolve the URL of an image asset
@@ -28,7 +27,7 @@ const apiUrl =
  * @returns {string|null} - The URL of the asset or null if not found
  */
 function resolveImageUrl(assetId, assets) {
-  const asset = assets.find((asset) => asset.sys.id === assetId);
+  const asset = assets.find(asset => asset.sys.id === assetId);
   return asset ? `https:${asset.fields.file.url}` : null;
 }
 
@@ -36,18 +35,16 @@ function resolveImageUrl(assetId, assets) {
  * Function to aggregate products by title
  * @param {Array} items - The array of product items
  * @param {Array} assets - The array of assets
- * @returns {Array} - The array of aggregated products
+ * @returns {Array} - The array of sort products
  */
-function aggregateProductsByTitle(items, assets) {
+function sortByTitle(items, assets) {
   const productsMap = {};
 
-  // Loop through each item to aggregate products
-  items.forEach((item) => {
+  // Loop through each item to sort products
+  items.forEach(item => {
     const product = item.fields;
     const { sku, primaryImage, title, description, size } = product;
-    const imageUrl = primaryImage
-      ? resolveImageUrl(primaryImage.sys.id, assets)
-      : null;
+    const imageUrl = primaryImage ? resolveImageUrl(primaryImage.sys.id, assets) : null;
 
     // Check if the product title already exists in the map
     if (!productsMap[title]) {
@@ -57,7 +54,7 @@ function aggregateProductsByTitle(items, assets) {
         title: title,
         description: description,
         imageUrl: imageUrl,
-        sizes: [], // Initialize an empty array for sizes
+        sizes: [] // Initialize an empty array for sizes
       };
     }
 
@@ -68,9 +65,7 @@ function aggregateProductsByTitle(items, assets) {
   });
 
   // Convert the map to an array and sort it alphabetically by title
-  return Object.values(productsMap).sort((a, b) =>
-    a.title.localeCompare(b.title)
-  );
+  return Object.values(productsMap).sort((a, b) => a.title.localeCompare(b.title));
 }
 
 // Route for the homepage
@@ -79,12 +74,20 @@ app.get("/", function (request, response) {
   fetchJson(apiUrl).then((apiData) => {
     const assets = apiData.includes.Asset;
 
-    // Aggregate products by title and sort them
-    const products = aggregateProductsByTitle(apiData.items, assets);
+    // sort products by title and sort them
+    const products = sortByTitle(apiData.items, assets);
 
+    // // Log the sorted products for debugging
+    // console.log("Sorted Products:", products);
+
+    // Render the index template with the sorted products
     response.render("index", {
-      products: products,
+      products: products
     });
+  }).catch(error => {
+    // Handle any errors that occur during the fetch operation
+    console.error("Error fetching API data:", error);
+    response.status(500).send("Internal Server Error");
   });
 });
 
