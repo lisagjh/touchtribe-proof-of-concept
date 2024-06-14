@@ -10,22 +10,24 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 const apiUrl =
-  "https://cdn.contentful.com/spaces/x2maf5pkzgmb/environments/master/entries?access_token=VcJDwIe2eizDEjIwdVdDsF7tcQZ-0_uIrcP4BiDULsg";
+  "https://cdn.contentful.com/spaces/x2maf5pkzgmb/environments/master/entries?access_token=VcJDwIe2eizDEjIwdVdDsF7tcQZ-0_uIrcP4BiDULsg&content_type=configurableProduct";
+const apiProductUrl =
+  "https://cdn.contentful.com/spaces/x2maf5pkzgmb/environments/master/entries?access_token=VcJDwIe2eizDEjIwdVdDsF7tcQZ-0_uIrcP4BiDULsg&content_type=product";
+const apiSizeUrl =
+  "https://cdn.contentful.com/spaces/x2maf5pkzgmb/environments/master/entries?access_token=VcJDwIe2eizDEjIwdVdDsF7tcQZ-0_uIrcP4BiDULsg&content_type=size";
 
-const confData = await fetchJson(apiUrl + "&content_type=configurableProduct");
-const productData = await fetchJson(apiUrl + "&content_type=product");
-const sizeData = await fetchJson(apiUrl + "&content_type=size");
-
-// route voor homepage
 app.get("/", function (request, response) {
-  // Haal alle personen uit de WHOIS API op
-  fetchJson(apiUrl).then((apiData) => {
+  fetchJson(apiProductUrl).then((productData) => {
+    console.log(productData); // Log the data to the console
     response.render("index", {
-      configured: confData.data,
-      products: productData.data,
-      sizes: sizeData.data,
+      products: productData.items, // Access the array inside the object
     });
   });
+});
+
+app.post("/", function (request, response) {
+  // Currently not handling POST data, redirect to the homepage
+  response.redirect(303, "/");
 });
 
 const PORT = process.env.PORT || 8000;
