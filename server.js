@@ -82,10 +82,6 @@ app.get("/", function (request, response) {
     // Aggregate products by title and sort them
     const products = aggregateProductsByTitle(apiData.items, assets);
 
-    // // Log the sorted products for debugging
-    // console.log("Sorted Products:", products);
-
-    // Render the index template with the sorted products
     response.render("index", {
       products: products,
     });
