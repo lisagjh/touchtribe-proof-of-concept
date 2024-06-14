@@ -11,23 +11,35 @@
                             <%= product.fields.title %>
                         </h2>
 
-                        <% if (product.imageUrl) { %> 
-                        <picture>
-                            <source srcset="<%= product.imageUrl %>?fm=avif&w=300" type="image/avif"
-                                media="(max-width: 500px)">
-                            <source srcset="<%= product.imageUrl %>?fm=avif&w=400" type="image/avif"
-                                media="(min-width: 501px)">
-                            <source srcset="<%= product.imageUrl %>?fm=webp&w=300" type="image/webp"
-                                media="(max-width: 500px)">
-                            <source srcset="<%= product.imageUrl %>?fm=webp&w=400" type="image/webp"
-                                media="(min-width: 501px)">
-                            <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
-                        </picture>
-                        <% } else { %>
-                        <img src="/assets/sweater.avif" alt="sweater" width="300">
-                        <% } %>
+                        <% if (product.imageUrl) { %>
+                            <picture>
+                                <source srcset="<%= product.imageUrl %>?fm=avif&w=300" type="image/avif"
+                                    media="(max-width: 500px)">
+                                <source srcset="<%= product.imageUrl %>?fm=avif&w=400" type="image/avif"
+                                    media="(min-width: 501px)">
+                                <source srcset="<%= product.imageUrl %>?fm=webp&w=300" type="image/webp"
+                                    media="(max-width: 500px)">
+                                <source srcset="<%= product.imageUrl %>?fm=webp&w=400" type="image/webp"
+                                    media="(min-width: 501px)">
+                                <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+                            </picture>
+                            <% } else { %>
+                                <img src="/assets/sweater.avif" alt="sweater" width="300">
+                                <% } %>
 
-                        <% }) %>
+                                    <form action="/">
+                                        <input id="small" name="size" type="radio"> S
+                                        <label for="small">
+                                        </label>
+                                        <input id="medium" name="size" type="radio"> M
+                                        <label for="medium">
+                                        </label>
+                                        <input id="large" name="size" type="radio"> L
+                                        <label for="large">
+                                        </label>
+                                    </form>
+
+                                    <% }) %>
             </section>
         </main>
 
