@@ -26,30 +26,24 @@ const simpleProducts = simpleProductsResponse.items; // Extract the items array 
 // Define the route for the home page
 app.get("/", function (request, response) {
   // Combine configurable products with their corresponding simple products
-  const combinedProduct = configurableProducts
-    .map((config) => {
-      // Check if the configurable product has associated simple products
-      if (!config.fields.products || config.fields.products.length === 0) {
-        return null; // Skip this config if no products are associated
-      }
+  const combinedProduct = configurableProducts.map((config) => {
 
-      // Find the corresponding simple product
-      const simple = simpleProducts.find(
-        (simple) => simple.sys.id == config.fields.products[0].sys.id
-      );
+    // Find the corresponding simple product
+    const simple = simpleProducts.find(
+      (simple) => simple.sys.id == config.fields.products[0].sys.id
+    );
 
-      // Return an object combining information from both products
-      return {
-        id: config.sys.id,
-        name: config.fields.title,
-        image: simple.fields.primaryImage.sys.id,
-        size: simple.fields.size,
-        description: simple.fields.description,
-      };
-    })
-    .filter((item) => item !== null); // Filter out any null entries
+    // Return an object combining information from both products
+    return {
+      id: config.sys.id,
+      name: config.fields.title,
+      image: simple.fields.primaryImage.sys,
+      size: simple.fields.size,
+      description: simple.fields.description,
+    };
+  });
 
-    console.log(combinedProduct)
+  console.log(combinedProduct);
   response.render("index", {
     products: combinedProduct, // Pass combinedProduct as 'products' to the EJS template
   });
