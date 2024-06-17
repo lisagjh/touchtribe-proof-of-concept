@@ -26,12 +26,34 @@
 
     <section class="header-product">
 
-        <h1>new product</h1>
-        <img src="/assets/sweater.avif" alt="sweater" width="380">
+        <h1>
+            <%= newProduct.name %>
+        </h1>
 
-        <p>hier komt het nieuwste product te staan. ooit?</p>
+        <% if (newProduct.image) { %>
+            <picture>
+                <source srcset="<%= newProduct.image.url %>?fm=avif&w=300" type="image/avif"
+                    media="(max-width: 500px)">
+                <source srcset="<%= newProduct.image.url %>?fm=avif&w=400" type="image/avif"
+                    media="(min-width: 501px)">
+                <source srcset="<%= newProduct.image.url %>?fm=webp&w=300" type="image/webp"
+                    media="(max-width: 500px)">
+                <source srcset="<%= newProduct.image.url %>?fm=webp&w=400" type="image/webp"
+                    media="(min-width: 501px)">
+                <img src="<%= newProduct.image.url %>" alt="<%= newProduct.title %>">
+            </picture>
+            <% } else { %>
+                <img src="/assets/sweater.avif" alt="sweater" width="300">
+                <% } %>
 
-        <!-- code to get newest product here! -->
+
+                    
+
+
+                    <p>
+                        <%= newProduct.description %>
+                    </p>
+
 
     </section>
 

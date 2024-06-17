@@ -132,7 +132,7 @@ nav .tt-wordmark {
   object-fit: cover;
   object-position: center;
   width: 100%;
-  /* clip-path: polygon(15% 0, 75% 0, 85% 15%, 85% 100%, 15% 100%); */
+  clip-path: polygon(20% 0%, 80% 0%, 80% 100%, 20% 100%);
 }
 
 /* PRODUCT CARD */
@@ -175,4 +175,62 @@ button[type="submit"] span {
 
 .tt-logo path {
   fill: white;
+}
+
+
+
+/* ANIMATION */
+
+nav {
+  animation: nav-anim 0.45s ease-out;
+}
+
+@keyframes nav-anim {
+  from {
+    translate: -100px 0;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+
+.tt-logo {
+  animation: logo-anim .4s ease-out .2s;
+}
+
+@keyframes logo-anim {
+  from {
+    translate: 0 200px;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+
+.tt-wordmark {
+  animation: wordmark-anim .4s ease-out .2s;
+}
+
+@keyframes wordmark-anim {
+  from {
+    translate: 0 -200px;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+
+.product-card img, .header-product img {
+  animation: img .5s ease-in-out;
+}
+
+@keyframes img {
+  from {
+    scale: 0.6;
+    opacity: 0;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
 }
