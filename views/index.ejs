@@ -5,39 +5,37 @@
         <main>
             <section class="product-container">
                 <% products.forEach(product=> { %>
-                    <% console.log(product.image) %>
                         <div class="product-card">
                             <h2>
                                 <%= product.name %>
+
                             </h2>
                             <!-- bron: https://www.contentful.com/blog/always-look-your-best-webp-source-sets-and-the-contentful-images-api/   -->
                             <!-- https://images.ctfassets.net/{space_id}/{asset_id}/{unique_id}/{name}?fm={image_format} -->
 
-                            <picture>
-                                <source srcset="https://images.ctfassets.net/<%= product.image%>?fm=avif&w=300"
-                                    type="image/avif" media="(max-width: 500px)">
-                                <source srcset="https://images.ctfassets.net/<%= product.image%>?fm=avif&w=400"
-                                    type="image/avif" media="(min-width: 501px)">
-                                <source srcset="https://images.ctfassets.net/<%= product.image%>?fm=webp&w=300"
+                            <% if (product.image) { %>
+                                <picture>
+                                    <source srcset="<%= product.image%>?fm=avif" type="image/avif"">
+                                    <source srcset=" https://images.ctfassets.net/<%=product.image%>"
                                     type="image/webp" media="(max-width: 500px)">
-                                <source srcset="https://images.ctfassets.net/<%= product.image%>?fm=webp&w=400"
-                                    type="image/webp" media="(min-width: 501px)">
-                                <img src="https://images.ctfassets.net/<%= product.image%>" alt="<%= product.title %>">
-                            </picture>
+                                    <img src="<%= product.image.url %>" width="300" alt="<% product.name %>">
+                                </picture>
+                                <% } else { %>
+                                    <img src="/assets/sweater.avif" alt="sweater" width="300">
+                                    <% } %>
+                                        <p>
+                                            <%= product.description %>
+                                        </p>
 
-                            <p>
-                                <%= product.description %>
-                            </p>
-
-                            <form action="/">
-                                <input id="small" name="size" type="radio"> S
-                                <label for="small"></label>
-                                <input id="medium" name="size" type="radio"> M
-                                <label for="medium"></label>
-                                <input id="large" name="size" type="radio"> L
-                                <label for="large"></label>
-                                <button type="submit">Add to cart</button>
-                            </form>
+                                        <form action="/">
+                                            <input id="small" name="size" type="radio"> S
+                                            <label for="small"></label>
+                                            <input id="medium" name="size" type="radio"> M
+                                            <label for="medium"></label>
+                                            <input id="large" name="size" type="radio"> L
+                                            <label for="large"></label>
+                                            <button type="submit">Add to cart</button>
+                                        </form>
                         </div>
                         <% }) %>
             </section>
