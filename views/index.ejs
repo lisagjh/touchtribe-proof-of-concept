@@ -1,6 +1,10 @@
-<%- include('./partials/head') %>
+<%- include('./partials/head') %> <%- include('./partials/header') %>
 
-    <%- include('./partials/header') %>
+<main>
+  <section class="product-container">
+    <% products.forEach(product=> { %>
+    <div class="product-card">
+      <h2><%= product.name %></h2>
 
         <main>
             <section class="product-container">
@@ -41,4 +45,4 @@
             </section>
         </main>
 
-        <%- include('./partials/foot') %>
+<%- include('./partials/foot') %>

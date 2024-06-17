@@ -53,17 +53,12 @@ console.log(app.locals.images)
 // Define the route for the home page
 app.get("/", function (request, response) {
   // Combine configurable products with their corresponding simple products
-  const combinedProduct = configurableProducts
-    .map((config) => {
-      // Check if the configurable product has associated simple products
-      if (!config.fields.products || config.fields.products.length === 0) {
-        return null; // Skip this config if no products are associated
-      }
+  const combinedProduct = configurableProducts.map((config) => {
 
-      // Find the corresponding simple product
-      const simple = simpleProducts.find(
-        (simple) => simple.sys.id == config.fields.products[0].sys.id
-      );
+    // Find the corresponding simple product
+    const simple = simpleProducts.find(
+      (simple) => simple.sys.id == config.fields.products[0].sys.id
+    );
 
       // Return an object combining information from both products
       return {
