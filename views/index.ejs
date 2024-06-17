@@ -14,16 +14,13 @@
         <% console.log(product.image) %>
         <source
           srcset="https://assets.ctfassets.net/x2maf5pkzgmb/<%= product.image %>?fm=avif"
-          type="image/avif"
-        />
+          type="image/avif"/>
         <source
           srcset="https://assets.ctfassets.net/x2maf5pkzgmb/<%= product.image %>?fm=webp"
-          type="image/webp"
-        />
+          type="image/webp"/>
         <img
           src="https://assets.ctfassets.net/x2maf5pkzgmb/<%= product.image %>"
-          alt="<%= product.name %>"
-        />
+          alt="<%= product.name %>"/>
       </picture>
 
       <p><%= product.description %></p>
