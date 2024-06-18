@@ -12,18 +12,6 @@
         </svg>
     </nav>
 
-    <!-- <div class="sticker">
-        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="31" fill="none">
-            <path fill="#8F62EC"
-                d="m10 26.6925-3.71312 3.9606C2.31587 26.9303.04567 21.7446.00064 16.3063L0 16.1415v-1.6299C0 9.06846 2.23048 3.86554 6.16705.11324L6.28688 0 10 3.96061C7.11833 6.66224 5.46857 10.4233 5.42969 14.369l-.00071.1426v1.6299c0 3.95 1.61548 7.7259 4.46739 10.4529L10 26.6925Z" />
-        </svg>
-        <p>New!</p>
-        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="31" fill="none">
-            <path fill="#fff"
-                d="m0 26.6925 3.71313 3.9606c3.971-3.7228 6.2412-8.9085 6.28623-14.3468L10 16.1415v-1.6299C10 9.06845 7.76952 3.86554 3.83295.11324L3.71313 0 0 3.96061C2.88167 6.66224 4.53143 10.4233 4.57031 14.369l.00071.1426v1.6299c0 3.95-1.61548 7.7259-4.4674 10.4529L0 26.6925Z" />
-        </svg>
-    </div> -->
-
     <section class="header-product">
 
         <h1>
@@ -32,29 +20,48 @@
 
         <% if (newProduct.image) { %>
             <picture>
-                <source srcset="<%= newProduct.image.url %>?fm=avif&w=300" type="image/avif"
-                    media="(max-width: 500px)">
-                <source srcset="<%= newProduct.image.url %>?fm=avif&w=400" type="image/avif"
-                    media="(min-width: 501px)">
-                <source srcset="<%= newProduct.image.url %>?fm=webp&w=300" type="image/webp"
-                    media="(max-width: 500px)">
-                <source srcset="<%= newProduct.image.url %>?fm=webp&w=400" type="image/webp"
-                    media="(min-width: 501px)">
+                <source srcset="<%= newProduct.image.url %>?fm=avif&w=320" type="image/avif" media="(max-width: 500px)">
+                <source srcset="<%= newProduct.image.url %>?fm=avif&w=400" type="image/avif" media="(min-width: 501px)">
+                <source srcset="<%= newProduct.image.url %>?fm=webp&w=320" type="image/webp" media="(max-width: 500px)">
+                <source srcset="<%= newProduct.image.url %>?fm=webp&w=400" type="image/webp" media="(min-width: 501px)">
                 <img src="<%= newProduct.image.url %>" alt="<%= newProduct.title %>">
             </picture>
             <% } else { %>
                 <img src="/assets/sweater.avif" alt="sweater" width="300">
                 <% } %>
 
-
-                    
-
-
                     <p>
                         <%= newProduct.description %>
                     </p>
 
+                    <form action="/cart" method="post">
+                        <fieldset>
+                            <input id="small" name="size" type="radio">
+                            <label for="small">S
+                            </label>
 
+                            <input id="medium" name="size" type="radio">
+                            <label for="medium">M
+                            </label>
+
+                            <input id="large" name="size" type="radio">
+                            <label for="large">L
+                            </label>
+                        </fieldset>
+                        <button type="submit">Add to cart</button>
+                    </form>
+
+                    <div class="sticker">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="31" fill="none">
+                            <path fill="#8F62EC"
+                                d="m10 26.6925-3.71312 3.9606C2.31587 26.9303.04567 21.7446.00064 16.3063L0 16.1415v-1.6299C0 9.06846 2.23048 3.86554 6.16705.11324L6.28688 0 10 3.96061C7.11833 6.66224 5.46857 10.4233 5.42969 14.369l-.00071.1426v1.6299c0 3.95 1.61548 7.7259 4.46739 10.4529L10 26.6925Z" />
+                        </svg>
+                        <p>New!</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="31" fill="none">
+                            <path fill="#fff"
+                                d="m0 26.6925 3.71313 3.9606c3.971-3.7228 6.2412-8.9085 6.28623-14.3468L10 16.1415v-1.6299C10 9.06845 7.76952 3.86554 3.83295.11324L3.71313 0 0 3.96061C2.88167 6.66224 4.53143 10.4233 4.57031 14.369l.00071.1426v1.6299c0 3.95-1.61548 7.7259-4.4674 10.4529L0 26.6925Z" />
+                        </svg>
+                    </div>
     </section>
 
 </header>

@@ -1,4 +1,5 @@
-<%- include('./partials/head') %> <%- include('./partials/header') %>
+<%- include('./partials/head') %> 
+<%- include('./partials/header') %>
 
         <main>
             <section class="product-container">
@@ -10,27 +11,35 @@
 
                         <% if (product.image) { %>
                             <picture>
-                                <source srcset="<%= product.image.url%>?fm=avif" type="image/avif"">
-                                <source srcset="<%=product.image.url%>"
+                                <source srcset="<%= product.image.url%>?fm=avif&w=300&h=200" type="image/avif"">
+                                <source srcset=" <%=product.image.url%>fm=webp&w=300&h=200"
                                 type="image/webp">
-                                <img src="<%= product.image.url %>" width="300" alt="<% product.name %>">
+                                <img src="<%= product.image.url %>?w=300&h=200" width="300" alt="<% product.name %>">
                             </picture>
-                            <% } else { %>
-                                <img src="/assets/sweater.avif" alt="sweater" width="300">
-                            <% } %>
+                        <% } else { %>
+                            <img src="/assets/sweater.avif" alt="sweater" width="300">
+                        <% } %>
+                        
+                        <p>
+                            <%= product.description %>
+                        </p>
 
-                             <p>
-                                <%= product.description %>
-                            </p>
-
-                            <form action="/">
+                        <form action="/cart" method="post">
+                            <fieldset>
                                 <input id="small" name="size" type="radio">
-                                <label for="small">S</label>
-                                <input id="medium" name="size" type="radio">         <label for="medium">M</label>
+                                <label for="small">S
+                                </label>
+                                
+                                    <input id="medium" name="size" type="radio"> 
+                                <label for="medium">M     
+                                </label>
+                                
                                 <input id="large" name="size" type="radio">
-                                <label for="large">L</label>
-                                <button type="submit">Add to cart</button>
-                            </form>
+                                <label for="large">L
+                                </label>
+                            </fieldset>
+                            <button type="submit">Add to cart</button>
+                        </form>
                     </div>
                     <% }) %>
             </section>
