@@ -1,30 +1,38 @@
-> _Fork_ deze leertaak en ga aan de slag. Onderstaande outline ga je gedurende deze taak in jouw eigen GitHub omgeving uitwerken. De instructie vind je in: [docs/INSTRUCTIONS.md](docs/INSTRUCTIONS.md)
+# Touchtribe Webshop
 
-# Titel
-<!-- Geef je project een titel en schrijf in één zin wat het is -->
+##  Opdracht
 
-## Inhoudsopgave
+Voor de opdrachtgever Touchtribe heb ik een webshop mogen realiseren waar hun werknemers tokens kunnen inwisselen voor merchandise.
 
-  * [Beschrijving](#beschrijving)
-  * [Gebruik](#gebruik)
-  * [Kenmerken](#kenmerken)
-  * [Installatie](#installatie)
-  * [Bronnen](#bronnen)
-  * [Licentie](#licentie)
 
-## Beschrijving
-<!-- Bij Beschrijving staat kort beschreven wat voor project het is en wat je hebt gemaakt -->
-<!-- Voeg een mooie poster visual toe 📸 -->
-<!-- Voeg een link toe naar Github Pages 🌐-->
 
-## Gebruik
-<!-- Bij Gebruik staat de user story, hoe het werkt en wat je er mee kan. -->
+## 📚Inhoudsopgave
 
-## Kenmerken
-<!-- Bij Kenmerken staat welke technieken zijn gebruikt en hoe. Wat is de HTML structuur? Wat zijn de belangrijkste dingen in CSS? Wat is er met JS gedaan en hoe? Misschien heb je iets met NodeJS gedaan, of heb je een framwork of library gebruikt? -->
 
-## Installatie
-<!-- Bij Instalatie staat hoe een andere developer aan jouw repo kan werken -->
+---
+
+
+## 🛠 Installatie
+
+1. Clone deze repository.
+2. Open de repository in je code-editor
+3. Open de terminal en typ 'npm install'
+4. Door gebruik te maken van 'npm start', krijg je een lokale link waar je de code live kunt bekijken
+5. Have fun!
+
+
+📱 Kenmerken
+Dit project is gemaakt met Node, Express, EJS. Ik heb gebruik gemaakt van d3.js om de kaart te implementeren waarop te zien is waar en welke Interceptors op dit moment gebruikt worden. Per Interceptor kan je zien hoeveel afval er is opgeruimd in totaal en in de laatste 30 dagen.
+Tools
+🖥️ Visual Studio Code
+🖥️ Cyclic
+### Gebruikte technieken
+* 📟 HTML
+* 🎨 CSS
+* 🕹️ JavaScript
+* NodeJS
+* 🚃 Express
+* ⚒️ EJS
 
 ## Bronnen
 
