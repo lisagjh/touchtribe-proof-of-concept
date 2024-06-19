@@ -21,11 +21,12 @@ Voor de opdrachtgever Touchtribe heb ik een webshop mogen realiseren waar hun we
 5. Have fun!
 
 
-📱 Kenmerken
-Dit project is gemaakt met Node, Express, EJS. Ik heb gebruik gemaakt van d3.js om de kaart te implementeren waarop te zien is waar en welke Interceptors op dit moment gebruikt worden. Per Interceptor kan je zien hoeveel afval er is opgeruimd in totaal en in de laatste 30 dagen.
-Tools
+## 📱 Kenmerken
+
+### Tools
 🖥️ Visual Studio Code
-🖥️ Cyclic
+🕸️ Render
+
 ### Gebruikte technieken
 * 📟 HTML
 * 🎨 CSS
