@@ -11,7 +11,6 @@ Voor de opdrachtgever Touchtribe heb ik een webshop mogen realiseren waar hun we
 
 ---
 
-
 ## 🛠 Installatie
 
 1. Clone deze repository.
@@ -22,6 +21,8 @@ Voor de opdrachtgever Touchtribe heb ik een webshop mogen realiseren waar hun we
 
 
 ## 📱 Kenmerken
+
+Dit project is gemaakt met Contentful API
 
 ### Tools
 🖥️ Visual Studio Code
@@ -35,7 +36,6 @@ Voor de opdrachtgever Touchtribe heb ik een webshop mogen realiseren waar hun we
 * 🚃 Express
 * ⚒️ EJS
 
-## Bronnen
 
 ## Licentie
 
