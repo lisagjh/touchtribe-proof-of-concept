@@ -26,12 +26,12 @@ Dit project is gemaakt met Contentful API
 🕸️ Render
 
 ### Gebruikte technieken
-* 📟 HTML
-* 🎨 CSS
-* 🕹️ JavaScript
+* HTML
+* CSS
+* JavaScript
 * NodeJS
-* 🚃 Express
-* ⚒️ EJS
+* Express
+* EJS
 
 
 ## Licentie
