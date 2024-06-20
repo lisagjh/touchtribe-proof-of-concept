@@ -1,9 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
   --inter: "Inter", sans-serif;
-  --inter-tight: "Inter Tight", sans-serif;
 
   --primary-one: #121212;
   --primary-two: #fff;
@@ -62,10 +60,6 @@ main {
   display: grid;
   place-items: center;
   width: 100vw;
-}
-
-p {
-  font-family: var(--inter-tight);
 }
 
 .product-container {
@@ -169,10 +163,30 @@ nav .tt-wordmark {
   z-index: 5;
 }
 
-/* @media (width > 35em) {
+@media (width > 35em) {
   .header-product {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 36em;
   }
-} */
+
+  .header-product h1 {
+    grid-column: 1/5;
+  }
+
+  .header-product picture {
+    grid-column: 1/5;
+  }
+  .header-product .text {
+    grid-column: 1/5;
+  }
+  .header-product form {
+    grid-column: 1/5;
+  }
+  .header-product .sticker {
+    grid-column: 4/5;
+    justify-self: flex-start;
+  }
+}
 
 /* PRODUCT CARD */
 
