@@ -4,12 +4,9 @@
 
 Voor de opdrachtgever Touchtribe heb ik een webshop mogen realiseren waar hun werknemers tokens kunnen inwisselen voor merchandise.
 
+![readme](https://github.com/lisagjh/touchtribe-proof-of-concept/assets/131701505/02c9b943-9710-48e1-9069-8fbc63171ff7)
 
 
-## 📚Inhoudsopgave
-
-
----
 
 ## 🛠 Installatie
 
@@ -29,12 +26,12 @@ Dit project is gemaakt met Contentful API
 🕸️ Render
 
 ### Gebruikte technieken
-* 📟 HTML
-* 🎨 CSS
-* 🕹️ JavaScript
+* HTML
+* CSS
+* JavaScript
 * NodeJS
-* 🚃 Express
-* ⚒️ EJS
+* Express
+* EJS
 
 
 ## Licentie
