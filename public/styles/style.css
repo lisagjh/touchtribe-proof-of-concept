@@ -313,32 +313,34 @@ footer li {
 /* ANIMATION */
 
 @media (prefers-reduced-motion: no-preference) {
-  @keyframes animate-in {
-    0% {
-      opacity: 0;
-      transform: translateY(50%);
+  @supports (animation-timeline) {
+    @keyframes animate-in {
+      0% {
+        opacity: 0;
+        transform: translateY(50%);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
 
-  @keyframes animate-out {
-    0% {
-      opacity: 1;
-      transform: translateY(0);
+    @keyframes animate-out {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100%);
+      }
     }
-    100% {
-      opacity: 0;
-      transform: translateY(-100%);
-    }
-  }
 
-  .product-card {
-    animation: animate-in linear forwards, animate-out linear forwards;
-    animation-timeline: view();
-    animation-range: entry, exit;
+    .product-card {
+      animation: animate-in linear forwards, animate-out linear forwards;
+      animation-timeline: view();
+      animation-range: entry, exit;
+    }
   }
 
   .sticker {
